@@ -1,0 +1,18 @@
+Some useful commands 
+For merging two files
+$cat file1.tab
+abc 12
+cdc 11
+def 11
+
+$cat file2.tab
+DEF 11
+fsf 22
+gsg 11
+
+Desired Output - file3.tab
+abc 12 DEF 11
+cdc 11 fsf 22
+def 11 gsg 11
+
+pr -mts,file1.tab file2.tab > file3.tab
