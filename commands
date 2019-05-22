@@ -14,5 +14,10 @@ Desired Output - file3.tab
 abc 12 DEF 11
 cdc 11 fsf 22
 def 11 gsg 11
+Command 
+$ pr -mts,file1.tab file2.tab > file3.tab
 
-pr -mts,file1.tab file2.tab > file3.tab
+file3.tab - output
+abc 12 DEF 11
+cdc 11 fsf 22
+def 11 gsg 11
