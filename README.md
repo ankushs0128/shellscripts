@@ -1,4 +1,10 @@
 # shellscripts
+Obtaining SRRIDs in SRA accession table from GSMID 
+
+grep ^SRR SRA_Accessions.tab | grep GSM1379814
+
+
+
 shell scripts for data handling
 
 
