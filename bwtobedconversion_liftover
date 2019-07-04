@@ -1,0 +1,50 @@
+#simple shell script for Conversion of BigWig Files for Bed format.  Bigwig to Wig using bigWigToWig utility for local from UCSC utilities 
+
+#Convert wig to bed format using Bedops tools.   after compiling binaries and make install binaries remember to export path where they are compiled e.g export PATH=$PATH:/usit/abel/u1/ankushs/software/bedops/bin
+# LIFTOVER performed locally for files using UCSC utilities remember to download chain file for  hg19toGrch38 liftover: http://hgdownload.soe.ucsc.edu/goldenPath/hg19/liftOver/hg19ToHg38.over.chain.gz
+
+#!/bin/bash
+#SBATCH --job-name=BWTOBED
+# Project:
+#SBATCH --account=
+# Wall clock limit:
+#SBATCH --time=8:00:00
+# Max memory usage:
+#SBATCH --mem-per-cpu=3G
+# Number of cores:
+#SBATCH --cpus-per-task=8
+#SBATCH --mail-user=
+#SBATCH --mail-type=FAIL
+#SBATCH --mail-type=END
+
+#If you need hugemem...
+#--partition=hugemem
+
+
+## Set up the job environment
+source /cluster/bin/jobsetup
+module load GCC
+set -o errexit
+
+Peakfiles=/software/ChromHMM/SAMPLEDATA_DU145/ATACSEQ-inhouse
+
+BIGWIG TO BED files 
+cd /software/FILEFORMATCONVERTER/
+./bigWigToWig $Peakfiles/ctrl_du145_atac_MACS2_bdgcmp_broad_ppois_sorted.bw $Peakfiles/ctrl_du145_atac_MACS2_bdgcmp_broad_ppois_sorted.wig
+./bigWigToWig $Peakfiles/foxa1_du145_atac_MACS2_bdgcmp_broad_ppois_sorted.bw $Peakfiles/foxa1_du145_atac_MACS2_bdgcmp_broad_ppois_sorted.wig
+./bigWigToWig $Peakfiles/foxa1-condn1_du145_atac_MACS2_bdgcmp_broad_ppois_sorted.bw $Peakfiles/foxa1-condn1_du145_atac_MACS2_bdgcmp_broad_ppois_sorted.wig
+./bigWigToWig $Peakfiles/sumo1-condn2_du145_atac_MACS2_bdgcmp_broad_ppois_sorted.bw $Peakfiles/sumo1-condn2_du145_atac_MACS2_bdgcmp_broad_ppois_sorted.wig
+
+# bedops WIG  TO BED FORMAT
+cd /software/bedops/
+./wig2bed --zero-indexed < $Peakfiles/ctrl_du145_atac_MACS2_bdgcmp_broad_ppois_sorted.wig > $Peakfiles/ctrl_du145_atac_MACS2_bdgcmp_broad_ppois_sorted.bed
+./wig2bed --zero-indexed < $Peakfiles/foxa1_du145_atac_MACS2_bdgcmp_broad_ppois_sorted.wig > $Peakfiles/foxa1_du145_atac_MACS2_bdgcmp_broad_ppois_sorted.bed
+./wig2bed --zero-indexed < $Peakfiles/foxa1-condn1_du145_atac_MACS2_bdgcmp_broad_ppois_sorted.wig > $Peakfiles/foxa1-condn1_du145_atac_MACS2_bdgcmp_broad_ppois_sorted.bed
+./wig2bed --zero-indexed < $Peakfiles/sumo1-condn2_du145_atac_MACS2_bdgcmp_broad_ppois_sorted.wig > $Peakfiles/sumo1-condn2_du145_atac_MACS2_bdgcmp_broad_ppois_sorted.bed
+
+#liftover
+cd /software/FILEFORMATCONVERTER/LIFTOVER/
+./liftOver $Peakfiles/ctrl_du145_atac_MACS2_bdgcmp_broad_ppois_sorted.bed hg19ToHg38.over.chain $Peakfiles/liftoverhg38_ctrl_du145_atac_MACS2_bdgcmp_broad_ppois_sorted.bed
+./liftOver $Peakfiles/foxa1_du145_atac_MACS2_bdgcmp_broad_ppois_sorted.bed hg19ToHg38.over.chain $Peakfiles/liftoverhg38_foxa1_du145_atac_MACS2_bdgcmp_broad_ppois_sorted.bed
+./liftOver $Peakfiles/foxa1-condn1_du145_atac_MACS2_bdgcmp_broad_ppois_sorted.bed hg19ToHg38.over.chain $Peakfiles/liftoverhg38_foxa1-condn1_du145_atac_MACS2_bdgcmp_broad_ppois_sorted.bed
+./liftOver $Peakfiles/sumo1-condn2_du145_atac_MACS2_bdgcmp_broad_ppois_sorted.bed hg19ToHg38.over.chain $Peakfiles/liftoverhg38_sumo1-condn2_du145_atac_MACS2_bdgcmp_broad_ppois_sorted.bed
