@@ -11,3 +11,6 @@ The LAYOUT result will tell you. Also, the 'Reads' label shows 1 read for single
 Syncing data from local to remote
 
 rsync -avzh --progress Methylation_epic/user@xyz.com:/work/users/abc/SINGLECELL/Raw-data/
+ SYncing data from REMOTE to REMOTE
+ 
+ rsync -vuar --progress BwFormat.zip user@uio.no:/storage/scratch/ftp/Folder1/folder1_1
