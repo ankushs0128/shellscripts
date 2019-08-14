@@ -1,0 +1,12 @@
+narrowpeak/Broadpeakto bedGraph
+
+Pathforpeakfiles =/Chipseq_peak-results/CHIPSEQ
+
+cut -f1-3,5 $Pathforpeakfiles/AR_ChIP-seq_DU145_AR_peak_SRR901751_peaks.narrowPeak > /CHIPSEQ/BedgraphFormat/AR_ChIP-seq_DU145_AR_peak_SRR901751_peaks.bedgraph     
+cut -f1-3,5 $Pathforpeakfiles/AR_ChIP-seq_DU145_AR_+_FoxA1_peak_SRR901752_peaks.narrowPeak > /CHIPSEQ/BedgraphFormat/AR_ChIP-seq_DU145_AR_+_FoxA1_peak_SRR901752_peaks.bedgraph
+
+#Bedgraph to Bigwig
+
+
+FILEFORMATCONVERTER/bedGraphToBigWig /CHIPSEQ/BedgraphFormat/SRR1200844_peaks.bedgraph /FILEFORMATCONVERTER/hg38chromsizes/hg38.chrom.sizes /CHIPSEQ/BwFormat/SRR1200844_peaks.bw 
+FILEFORMATCONVERTER/bedGraphToBigWig /CHIPSEQ/BedgraphFormat/SRR1200843_peaks.bedgraph /FILEFORMATCONVERTER/hg38chromsizes/hg38.chrom.sizes /CHIPSEQ/BwFormat/SRR1200843_peaks.bw 
