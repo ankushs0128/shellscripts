@@ -1,0 +1,8 @@
+Changing time stamps for folders/files in Linux to prevent it from automatically deleted after a certain time(time limit in Workload scheduler like LSF, Slurm )
+The files with extension bam , fq and fastq will be changed to  Sept02,2019,  and time 14:29.   
+
+for i in $(ls FASTQ-SRA/PAIRED-END/FILT_BAMS/); do echo
+touch -t 1909021429.30 FASTQ-SRA/PAIRED-END/FILT_BAMS/${i}/*.bam
+touch -t 1909021429.30 FASTQ-SRA/PAIRED-END/FILT_BAMS/${i}/*.fq
+touch -t 1909021429.30 FASTQ-SRA/PAIRED-END/FILT_BAMS/$i/*.fastq
+done
