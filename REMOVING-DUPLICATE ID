@@ -1,0 +1,25 @@
+Check.txt
+GeneSymbol Sample1  Sample2 Sample3 Sample4
+TSPAN6	0	0	2	0	
+TSPAN6	0	0	0	0	
+TSPAN6	2	4	3	3
+SCYL3	38	25	29	26
+C1orf112	83	94	92	76
+FGR	0	0	1	1
+CFH	4	4	10	6
+CFH	4	5	9	4	7
+
+
+command 
+awk '$1 in a {$1=$1 "_" ++a[$1]}{a[$1];print}' check.txt > check1-noduplicates.txt
+
+check1-noduplicates.txt
+GeneSymbol Sample1  Sample2 Sample3 Sample4
+TSPAN6	0	0	2	0	
+TSPAN6_1	0	0	0	0	
+TSPAN6_2	2	4	3	3
+SCYL3	38	25	29	26
+C1orf112	83	94	92	76
+FGR	0	0	1	1
+CFH	4	4	10	6
+CFH_1	4	5	9	4	7
