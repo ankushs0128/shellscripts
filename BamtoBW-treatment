@@ -1,0 +1,37 @@
+#!/bin/bash
+#SBATCH --job-name=Paired-Treatment-BWFILES
+# Project:
+#SBATCH --account=projectname
+# Wall clock limit:
+#SBATCH --time=36:00:00
+# Max memory usage:
+#SBATCH --mem-per-cpu=4G
+# Number of cores:
+#SBATCH --cpus-per-task=14
+#SBATCH --mail-user=email@email.com
+#SBATCH --mail-type=FAIL
+#SBATCH --mail-type=END
+
+#If you need hugemem...
+#--partition=hugemem
+
+
+## Set up the job environment
+source /cluster/bin/jobsetup
+
+module load samtools
+
+set -o errexit
+
+read_path=/work/users/ankushs/foxa1-sumolink/CHIPSEQ/FASTQ-SRA/PAIRED-END
+chromsizes=/usit/abel/u1/ankushs/software/FILEFORMATCONVERTER/hg38chromsizes
+BamtoBW=/work/users/ankushs/foxa1-sumolink/CHIPSEQ/FASTQ-SRA/BWFILES_RAWBAM
+
+
+for i in $(ls $read_path/ANALYSIS-TREATMENT_CHIPSEQ); do echo
+
+samtools sort -@ 16 $read_path/ANALYSIS-TREATMENT_CHIPSEQ/${i}/${i}\_fixmate.bam > $read_path/ANALYSIS-TREATMENT_CHIPSEQ/${i}/${i}\_fixmate_sorted.bam
+samtools index -bc $read_path/ANALYSIS-TREATMENT_CHIPSEQ/${i}/${i}\_fixmate_sorted.bam
+bamCoverage -b $read_path/ANALYSIS-TREATMENT_CHIPSEQ/${i}/${i}\_fixmate_sorted.bam -o $BamtoBW/PAIREDBW/${i}\_treatment.bw
+# > $read_path/ANALYSIS-TREATMENT_CHIPSEQ/${i}/${i}\_fixmate-index.bam
+done
