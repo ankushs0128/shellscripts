@@ -14,3 +14,11 @@ rsync -avzh --progress Methylation_epic/user@xyz.com:/work/users/abc/SINGLECELL/
  SYncing data from REMOTE to REMOTE
  
  rsync -vuar --progress BwFormat.zip user@uio.no:/storage/scratch/ftp/Folder1/folder1_1
+ 
+ FILES
+ BAMtoBW-treatment : bamCoverage command of deeptools for converting BAM files to BW 
+ Changing Timestamps : It changes time stamps of the files.  
+ REMOVING-DUPLICATE ID : removing duplicate id´s 
+ Single_End_BAMTOBW : bamCoverage command  of deeptools for converting BAM files to BW
+ bamToBW : bamCoverage command  of deeptools for converting BAM files to BW
+ bwtobedconversion_liftover -  bedops tools bigwid to bed and wig to bedformat 
