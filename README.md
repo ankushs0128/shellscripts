@@ -15,7 +15,7 @@ rsync -avzh --progress Methylation_epic/user@xyz.com:/work/users/abc/SINGLECELL/
  
  rsync -vuar --progress BwFormat.zip user@uio.no:/storage/scratch/ftp/Folder1/folder1_1
  
- FILES
+shell scripts: 
  BAMtoBW-treatment : bamCoverage command of deeptools for converting BAM files to BW 
  Changing Timestamps : It changes time stamps of the files.  
  REMOVING-DUPLICATE ID : removing duplicate id´s 
