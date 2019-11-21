@@ -1,5 +1,5 @@
 ERROR: 
-Error File **'NAMEofthebedfile.bed' - Error line 2 of custom track: thickStart out of range (chromStart to chromEnd, or 0 if no CDS)"**
+Error File 'NAMEofthebedfile.bed' - Error line 2 of custom track: thickStart out of range (chromStart to chromEnd, or 0 if no CDS)"
 
 The error is resulted for because of standard .bed+6 format ( UCSC reads the file as if there is no header). 
 
